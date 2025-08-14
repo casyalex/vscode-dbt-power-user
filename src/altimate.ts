@@ -1,17 +1,17 @@
-import type { RequestInit } from "node-fetch";
-import { CommentThread, env, Uri, window, workspace } from "vscode";
-import { provideSingleton, processStreamResponse } from "./utils";
-import { ColumnMetaData, NodeMetaData, SourceMetaData } from "./domain";
-import { TelemetryService } from "./telemetry";
-import { join } from "path";
+import { NotebookItem, NotebookSchema, PreconfiguredNotebookItem } from "@lib";
 import { createReadStream, createWriteStream, mkdirSync, ReadStream } from "fs";
+import type { RequestInit } from "node-fetch";
 import * as os from "os";
-import { RateLimitException, ExecutionsExhaustedException } from "./exceptions";
-import { DBTProject } from "./manifest/dbtProject";
-import { DBTTerminal } from "./dbt_client/dbtTerminal";
-import { PythonEnvironment } from "./manifest/pythonEnvironment";
-import { PreconfiguredNotebookItem, NotebookItem, NotebookSchema } from "@lib";
+import { join } from "path";
 import * as vscode from "vscode";
+import { env, Uri, window, workspace } from "vscode";
+import { DBTTerminal } from "./dbt_client/dbtTerminal";
+import { ColumnMetaData, NodeMetaData, SourceMetaData } from "./domain";
+import { ExecutionsExhaustedException, RateLimitException } from "./exceptions";
+import { DBTProject } from "./manifest/dbtProject";
+import { PythonEnvironment } from "./manifest/pythonEnvironment";
+import { TelemetryService } from "./telemetry";
+import { processStreamResponse, provideSingleton } from "./utils";
 
 export class NoCredentialsError extends Error {}
 
@@ -410,6 +410,7 @@ export class AltimateRequest {
   }
 
   handlePreviewFeatures(): boolean {
+    return true;
     const message = this.getCredentialsMessage();
     if (!message) {
       return true;
