@@ -411,12 +411,13 @@ export class AltimateRequest {
 
   handlePreviewFeatures(): boolean {
     return true;
-    const message = this.getCredentialsMessage();
-    if (!message) {
-      return true;
-    }
-    this.showAPIKeyMessage(message);
-    return false;
+    // always disable authenicate
+    // const message = this.getCredentialsMessage();
+    // if (!message) {
+    //   return true;
+    // }
+    // this.showAPIKeyMessage(message);
+    // return false;
   }
 
   async fetchAsStream<R>(
